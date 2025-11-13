@@ -29,7 +29,7 @@ tzdesign <- svydesign(
   data = tzdata2012
 )
 
-#Start of assignments
+#Start of assignment
 
 
 #1
@@ -78,7 +78,6 @@ region <- tzdata %>%
 national_table <- national %>% mutate(Level = "National", Category = "All")
 area_table <- area %>% mutate(Level = "Area", Category = STRATUM) %>% select(-STRATUM)
 region_table <- region %>% mutate(Level = "Region", Category = region) %>% select(-region)
-
 
 all_results <- bind_rows(national_table, area_table, region_table)
 
