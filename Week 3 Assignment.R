@@ -34,6 +34,7 @@ tzdesign <- svydesign(
 
 #1
 
+#Calculations of the standard and the poverty line
 tzdata <- bind_rows(tzdata2012, tzdata2018)
 
 national <- tzdata %>%
@@ -53,22 +54,19 @@ area <- tzdata %>%
 region <- tzdata %>% 
   group_by(year, region) %>% 
   summarise(
-    headcount_std = weighted.mean(cons < povline, hhweight * hhsize) * 100,
+    headcount_standard = weighted.mean(cons < povline, hhweight * hhsize) * 100,
     headcount_food = weighted.mean(cons < food_povline, hhweight * hhsize) * 100
   )
 
-print(national)
-#2012 headcount standard: 28.2
-#2012 headcount food: 9.74
 
-#2018 headcount standard: 26.4
-#2018 headcount food: 8.01
-
-print(area)
+#Table
+national_table <- national %>% mutate(Level = "National", Category = "All")
+area_table <- area %>% mutate(Level = "Area", Category = STRATUM) %>% select(-STRATUM)
+region_table <- region %>% mutate(Level = "Region", Category = region) %>% select(-region)
 
 
-print(region)
-  
+all_results <- bind_rows(national_table, area_table, region_table)
 
+kable(all_results)
 
   
