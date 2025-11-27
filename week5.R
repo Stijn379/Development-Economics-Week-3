@@ -38,6 +38,16 @@ data <- read_csv(file = "monocentric_2016.csv")
 # hhsize = "household size"
 #
 
+#renaming col names
+colnames(monocentric_2016) <- as.character(unlist(monocentric_2016[1, ]))
+monocentric_2016 <- monocentric_2016[-1, ]
+
+# selecting only municipality nijmegen 
+data <- monocentric_2016 %>%
+  filter(munname == "Nijmegen") 
+
+
+  
 # Get descriptive histogram
 hist(data$pricem2)
 
