@@ -45,10 +45,19 @@ data <- read_csv(file = "monocentric_2016.csv")
 #renaming col names
 colnames(monocentric_2016) <- as.character(unlist(monocentric_2016[1, ]))
 monocentric_2016 <- monocentric_2016[-1, ]
+monocentric_2016 <- read.csv("monocentric_2016.csv", header = TRUE)
 
 # selecting only municipality Nijmegen 
 data <- monocentric_2016 %>%
   filter(munname == "Nijmegen") 
+
+#creating a table 
+install.packages("psych")
+library(psych)
+describe(monocentric_2016[, c("pricem2", "distcbd", "popdens")])
+
+
+
 
 
 ############################################################
@@ -101,3 +110,5 @@ abline(coef = c(coef_m2[1], coef_m2[2]),
 abline(coef = c(coef_m2[1] + coef_m2[3], coef_m2[2] + coef_m2[4]), 
        col = "purple",
        lwd = 2)
+
+monocentric_2016 <- monocentric_2016[, !duplicated(names(monocentric_2016))]
