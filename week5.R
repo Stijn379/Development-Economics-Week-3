@@ -50,6 +50,10 @@ monocentric_2016 <- monocentric_2016[-1, ]
 data <- monocentric_2016 %>%
   filter(munname == "Nijmegen") 
 
+# creating a table 
+install.packages("psych")
+library(psych)
+describe(monocentric_2016[, c("pricem2", "distcbd", "popdens")])
 
 ############################################################
 # voorbeeld code
